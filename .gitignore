@@ -23,3 +23,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# C++ build artifacts
+*.exe
+*.o
+*.obj
+*.out
+build/

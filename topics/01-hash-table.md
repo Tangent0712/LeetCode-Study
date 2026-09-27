@@ -3,6 +3,10 @@
 > 状态：🟨 进行中 ｜ 题数：3 ｜ 面试权重：★★★★★
 > 一句话目标：学会「用空间换时间」——别一遍遍去找，改成**边看边记在小本本上**。
 
+> **双语言模式（R19）**：本题代码**先用 TypeScript 写**（在 `src/01-hash-table/`）；
+> **TS 通过后**，每题下方会出现 **`📘 C++ 对照`**（在 `cpp/01-hash-table/`，可编译可运行）+「TS ↔ C++ 差异」，
+> **你只需阅读**（也可自己编译跑一遍）。详见 `AGENTS.md §9`。
+
 ---
 
 ## 套路卡（先读「一句话版」，懂了就往下跳到做题）
@@ -306,6 +310,42 @@ export function hasDuplicate(nums: number[]): boolean {
 - 怎么修的：把 `in` 换成 `of`（`for...of` 取值）。
 - 一句话套路：**`for...of` 取值，`for...in` 取键**；写完先跑 `npx tsc --noEmit`，类型错误会提前抓住这类 bug。
 
+**📘 C++ 对照（TS 通过后阅读）**：
+
+```cpp
+// cpp/01-hash-table/warmup-01-has-duplicate.cpp
+#include <vector>
+#include <unordered_set>
+
+bool hasDuplicate(const std::vector<int>& nums) {
+    std::unordered_set<int> seen;     // ≈ TS 的 new Set<number>()
+    for (int x : nums) {              // 范围 for ≈ TS 的 for (const x of nums)
+        if (seen.count(x) > 0) {      // count > 0 即"存在" ≈ seen.has(x)
+            return true;
+        }
+        seen.insert(x);               // ≈ seen.add(x)
+    }
+    return false;
+}
+```
+
+- **TS ↔ C++ 关键差异**：
+
+  | 目的 | TypeScript | C++ |
+  |---|---|---|
+  | 动态数组 | `number[]` | `std::vector<int>` |
+  | 哈希集合 | `Set<number>` | `std::unordered_set<int>` |
+  | 判存在 | `seen.has(x)` | `seen.count(x) > 0` |
+  | 加入 | `seen.add(x)` | `seen.insert(x)` |
+  | 遍历值 | `for (const x of nums)` | `for (int x : nums)` |
+  | 传参 | 直接传数组 | `const std::vector<int>&`（引用且只读，避免复制） |
+
+**🧪 C++ 本地验证指令**：
+```bash
+g++ -std=c++17 -O2 cpp/01-hash-table/warmup-01-has-duplicate.test.cpp -o cpp/01-hash-table/warmup-01.test.exe
+./cpp/01-hash-table/warmup-01.test.exe
+```
+
 ---
 
 ## 零基础精讲 ②：从「有没有」到「有几次」——认识 `Map`（W2 配套）
@@ -433,6 +473,38 @@ export function countFrequency(nums: number[]): Map<number, number> {
 **复盘**：
 - 卡点：无（一次通过）。
 - 一句话套路：**计数 = `map.set(x, (map.get(x) ?? 0) + 1)`；用 `for...of` 遍历值**。
+
+**📘 C++ 对照（TS 通过后阅读）**：
+
+```cpp
+// cpp/01-hash-table/warmup-02-count-frequency.cpp
+#include <vector>
+#include <unordered_map>
+
+std::unordered_map<int, int> countFrequency(const std::vector<int>& nums) {
+    std::unordered_map<int, int> count;
+    for (int x : nums) {
+        count[x]++;   // operator[] 遇到新键会"默认插入 0"再自增
+                      // ≈ TS 的 count.set(x, (count.get(x) ?? 0) + 1)
+    }
+    return count;
+}
+```
+
+- **TS ↔ C++ 关键差异**：
+
+  | 目的 | TypeScript | C++ |
+  |---|---|---|
+  | 哈希映射 | `Map<number, number>` | `std::unordered_map<int, int>` |
+  | 计数 +1 | `m.set(x, (m.get(x) ?? 0) + 1)` | `m[x]++`（`operator[]` 自动补 0） |
+  | 读值 | `m.get(x)` | `m.at(x)`（不存在抛异常）/ `m[x]` |
+  | 判存在 | `m.has(x)` | `m.count(x) > 0` 或 `m.find(x) != m.end()` |
+
+**🧪 C++ 本地验证指令**：
+```bash
+g++ -std=c++17 -O2 cpp/01-hash-table/warmup-02-count-frequency.test.cpp -o cpp/01-hash-table/warmup-02.test.exe
+./cpp/01-hash-table/warmup-02.test.exe
+```
 
 ---
 
@@ -563,6 +635,43 @@ export function twoSum(nums: number[], target: number): number[] {
 - 卡点：无（一次通过）。
 - 从暴力到最优的演进：两层循环 O(n²) → 用 Map 把「找补数」降到 O(1)，整体 O(n)。
 - 一句话套路：**遍历时对每个 `x` 查「`target − x` 见过没」；先查、后存。**
+
+**📘 C++ 对照（TS 通过后阅读）**：
+
+```cpp
+// cpp/01-hash-table/0001-two-sum.cpp
+#include <vector>
+#include <unordered_map>
+
+std::vector<int> twoSum(const std::vector<int>& nums, int target) {
+    std::unordered_map<int, int> seen;      // 数 -> 下标
+    for (int i = 0; i < (int)nums.size(); i++) {
+        int need = target - nums[i];        // 补数
+        auto it = seen.find(need);          // find 返回"迭代器"
+        if (it != seen.end()) {             // 找到（没到末尾）
+            return {it->second, i};         // {补数下标, 当前下标}
+        }
+        seen[nums[i]] = i;                  // 先查后存
+    }
+    return {};
+}
+```
+
+- **TS ↔ C++ 关键差异**：
+
+  | 目的 | TypeScript | C++ |
+  |---|---|---|
+  | 返回多值 | `return [a, b]`（数组） | `return {a, b};`（`std::vector<int>` 初始化列表） |
+  | 查键 | `m.has(k)` / `m.get(k)!` | `auto it = m.find(k); it != m.end(); it->second` |
+  | 写键 | `m.set(k, v)` | `m[k] = v` |
+  | 长度 | `nums.length` | `(int)nums.size()`（`size()` 返回无符号，比较时习惯转 `int`） |
+  | 下标循环 | `for (let i = 0; ...)` | `for (int i = 0; ...)` |
+
+**🧪 C++ 本地验证指令**：
+```bash
+g++ -std=c++17 -O2 cpp/01-hash-table/0001-two-sum.test.cpp -o cpp/01-hash-table/0001-two-sum.test.exe
+./cpp/01-hash-table/0001-two-sum.test.exe
+```
 
 ---
 

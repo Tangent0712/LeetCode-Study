@@ -10,7 +10,7 @@
 ## 0. 一句话说明这个仓库
 
 - **目标**：**系统性**刷完 LeetCode 热题 Hot 100——**按专题推进**，拒绝「东学一题西学一题」。
-- **语言 / 环境**：**TypeScript**，在**本地 Windows 用 Node.js 运行**（本工程不使用 WSL）。
+- **语言 / 环境**：**主语言 TypeScript + 对照语言 C++（双语言模式）**，在**本地 Windows** 用 Node.js 与 g++ 运行（本工程不使用 WSL）。
 - **方式**：文件里就地作答 → Agent 即时批改 → 更新画像 → `git commit`。
 - **教学重点**：治「空白页恐惧」；用**三级提示阶梯**逼学习者自己长出来，而不是看答案。
 
@@ -52,7 +52,7 @@
 | R8 | **学习者作答后，Agent 先格式化整理其答案**（补小标题/编号、修缩进、终端输出合并进代码块），**只改形式不改结论**，再批改。 |
 | R9 | **不预置「我的疑问」占位块**；学习者有疑问时自行新增 `### 我的疑问（<日期>）`，Agent 下次批改一并回答。 |
 | R10 | **不设时间窗口**：不谈时间、不催进度、不排日程。 |
-| R11 | 语言固定 **TypeScript**；每题**先写能跑的解法（可暴力）**，再优化；**必写时间/空间复杂度**。 |
+| R11 | **双语言模式**：主语言 **TypeScript**（学习者先写、先跑通），**C++ 为对照学习语言**（TS 通过后由 Agent 给完整可编译代码 + 逐行讲解，学习者只读）。每题先写能跑的解法（可暴力）再优化；**必写时间/空间复杂度**。 |
 | R12 | **三级提示阶梯**（默认只给 L1，见 §7）；不得直接抛答案。 |
 | R13 | **按专题系统推进**：进入一个专题先给「套路卡」，做完该专题再进入下一个。 |
 | R14 | 每题都要有**可本地运行的代码**（放 `src/`），并能在专题 md 中读到；**每个题目区块必须写明该题的「本地验证指令」**（`npx vitest run <该题 test 文件>` 与 `npx tsc --noEmit`）。 |
@@ -60,6 +60,7 @@
 | R16 | **TS 语法首次出现必教**：任何 TS 语法 / 类型 / 标准 API（如 `Set`、`for...of`、泛型、可选链）第一次用到时，Agent 必须就地讲解并登记到 `notes/typescript-basics.md`（是什么 / 为什么 / 最小示例 / 常见坑）；学习者 TS 零基础，禁止默认其已知。 |
 | R17 | **文档优先（窗口只指路）**：教学/解释/批改/叮嘱一律写进文档；对话窗口**只输出「现在请看哪个文档」**（给出路径 + 要做的动作），不在窗口里展开。 |
 | R18 | **零基础节奏**：从零开始、尽量详细，先讲透原理与例子，**不要一上来就要求学习者写代码**；每个专题先「精讲 → 带例子的演示 → 再动手」。 |
+| R19 | **双语言节奏（TS→C++）**：每题必须**先在 TypeScript 通过（自测 + 批改）**，之后才给出 C++ 对照（`cpp/NN-topic/`，可编译可运行），并用「TS ↔ C++ 差异表 / 逐行注释」讲清两种写法。**不得跳过 TS 直接讲 C++**。 |
 
 ---
 
@@ -127,7 +128,7 @@
 
 **（e）每个专题文件 `topics/NN-xxx.md`** —— 用 §6 模板建空骨架（含专题套路卡 + 该专题各题的题目区）。
 
-**（f）`src/` TypeScript 工程** —— 见 §9。
+**（f）`src/` TypeScript 工程 + `cpp/` C++ 对照工程** —— 见 §9（双语言）。
 
 **（g）`review-log.md`** —— 错题/重做台账。
 
@@ -244,6 +245,18 @@ npx tsc --noEmit
 - 从暴力到最优的演进：
 - 一句话套路：
 
+**📘 C++ 对照（TS 通过后由 Agent 提供，直接阅读）**：
+```cpp
+// 完整、可编译的 C++ 版本（含中文逐行注释）
+```
+- **TS ↔ C++ 关键差异**：
+  - <数据类型 / 容器 / 语法差异>
+- **🧪 C++ 本地验证指令**：
+  ```bash
+  g++ -std=c++17 -O2 cpp/NN-xx/MMMM-<slug>.test.cpp -o cpp/NN-xx/MMMM-<slug>.test.exe
+  ./cpp/NN-xx/MMMM-<slug>.test.exe
+  ```
+
 ---
 （下一题同构重复）
 
@@ -287,7 +300,7 @@ npx tsc --noEmit
 
 ---
 
-## 9. 运行环境与 TypeScript 约定
+## 9. 运行环境与代码约定（TypeScript + C++ 双语言）
 
 > **重要：所有题目都在本地（Windows）用 Node.js 运行，不用 WSL。终端用本地 PowerShell / cmd 或 VS Code 集成终端。**
 
@@ -323,6 +336,22 @@ npx tsx src/01-hash-table/0001-two-sum.ts
 npx vitest run src/01-hash-table/0001-two-sum.test.ts
 npx tsc --noEmit
 ```
+
+### C++（对照学习语言，R19）
+
+- **编译器**：**g++ 15.1.0（MinGW-w64）**。自检：`g++ --version`。
+- **目录**：`cpp/NN-topic/`，与 `src/NN-topic/` 一一对应。
+  - `MMMM-slug.cpp`：解法（函数 / 类，无 `main`）。
+  - `MMMM-slug.test.cpp`：本地测试（`#include` 解法文件 + `<cassert>`，自带 `main`）。
+  - `cpp/shared/`：`structures.hpp` 等公共结构（对应 `src/shared/structures.ts`）。
+- **标准 / 优化**：`-std=c++17 -O2`。
+- **谁写**：C++ 由 **Agent 提供**（完整、可编译、含中文逐行注释）；学习者**只读**（也可自己编译跑一遍看效果）。
+- **前提**：**该题 TS 已通过**（R19）。
+- **运行示例**：
+  ```bash
+  g++ -std=c++17 -O2 cpp/01-hash-table/0001-two-sum.test.cpp -o cpp/01-hash-table/0001-two-sum.test.exe
+  ./cpp/01-hash-table/0001-two-sum.test.exe
+  ```
 
 ---
 
@@ -360,7 +389,7 @@ npx tsc --noEmit
 
 1. 读本文件 §0–§13，理解规则。
 2. **检查本地 Node 环境**（`node -v` / `npm -v`）；若没有，引导学习者安装 **Node.js LTS（本地 Windows，不用 WSL）**，装完重开终端。
-3. 执行 **§4 Phase 0**：建目录（`00-index.md` / `README.md` / `learner-profile.md` / `conventions.md` / `topics/*` / `review-log.md`），并初始化 `src/` 的 Node + TypeScript 工程（`npm init`、装 devDeps、写 `tsconfig.json`）。
+3. 执行 **§4 Phase 0**：建目录（`00-index.md` / `README.md` / `learner-profile.md` / `conventions.md` / `topics/*` / `notes/*` / `review-log.md` / `cpp/*`），并初始化 `src/` 的 Node + TypeScript 工程（`npm init`、装 devDeps、写 `tsconfig.json`）；确认 `g++ --version` 可用。
 4. 按 §4.5 向学习者汇报，并等待确认。
 5. 确认后进入**第一个专题（01 哈希）**：给套路卡 → 出第 1 题的模板 → 等学习者作答 → 批改 → 更新 → commit。
 
@@ -376,3 +405,4 @@ npx tsc --noEmit
 | 2026-09-27 | 新增 R16：TS 语法/标准 API 首次出现必教，并登记到 `notes/typescript-basics.md` | Tangent 提议 / AI |
 | 2026-09-27 | 新增 R17：文档优先，对话窗口只指路；新增 `current-task.md` 作为「现在看哪」的导览 | Tangent 提议 / AI |
 | 2026-09-27 | 取消 `current-task.md`（改由对话窗口直接指路）；新增 R18「零基础节奏：从零详细讲、先讲透再动手」 | Tangent 提议 / AI |
+| 2026-09-27 | 新增 R19「双语言模式（TS→C++）」：TS 先写，通过后由 Agent 给 C++ 对照；新增 `cpp/` 工程与 g++ 约定 | Tangent 提议 / AI |

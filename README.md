@@ -1,6 +1,7 @@
-# LeetCode-GOGOGO · 热题 Hot 100（TypeScript 系统刷题）
+# LeetCode-GOGOGO · 热题 Hot 100（TypeScript + C++ 双语言）
 
-> 目标：**按专题系统推进**刷完 LeetCode 热题 Hot 100，用 **TypeScript** 在 **本地 Windows + Node.js** 运行。
+> 目标：**按专题系统推进**刷完 LeetCode 热题 Hot 100。
+> **双语言模式**：先用 **TypeScript** 写通（本地 Windows + Node.js），TS 通过后再读 **C++** 对照版（本地 g++ 编译）。
 > 纯文档、中文、术语中英对照、讲透底层；文件里就地作答 → 即时批改 → 更新画像 → git 提交。
 
 - 主协议：[`AGENTS.md`](./AGENTS.md)（每次开工先读）
@@ -55,6 +56,13 @@ npx tsc --noEmit                                # 严格类型检查
 
 > 环境：Node.js LTS（本地）+ npm；devDeps：`typescript` / `tsx` / `vitest` / `@types/node`。
 
+**C++ 对照（TS 通过后阅读，`cpp/NN-topic/`）**：
+```bash
+g++ -std=c++17 -O2 cpp/01-hash-table/0001-two-sum.test.cpp -o cpp/01-hash-table/0001-two-sum.test.exe
+./cpp/01-hash-table/0001-two-sum.test.exe
+```
+> 环境：g++ 15.1.0（MinGW-w64）。C++ 由 Agent 提供，学习者只读。
+
 ## 四、更新日志
 
 | 日期 | 内容 | 更新者 |
@@ -65,3 +73,4 @@ npx tsc --noEmit                                # 严格类型检查
 | 2026-09-27 | 新增 R17「文档优先，窗口只指路」与 `current-task.md` 导览；套路卡改为「人话版」 | Tangent / AI |
 | 2026-09-27 | 取消 `current-task.md`；新增 R18「零基础节奏：从零详细讲、先讲透再动手」 | Tangent / AI |
 | 2026-09-27 | 专题 01 完成 1 题：1.两数之和 ✅ AC；W1/W2 热身 ✅ | AI |
+| 2026-09-27 | 改为**双语言模式（R19）**：TS 先写，通过后给 C++ 对照；新增 `cpp/` 与 g++ 约定 | Tangent / AI |
