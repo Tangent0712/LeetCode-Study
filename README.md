@@ -17,7 +17,7 @@
 
 | # | 专题 | 文件 | 题数 | 已完成 | 状态 |
 |---|---|:--:|:--:|:--:|:--:|
-| 01 | 哈希 Hash Table | [`topics/01-hash-table.md`](./topics/01-hash-table.md) | 3 | 0 | 🟨 |
+| 01 | 哈希 Hash Table | [`topics/01-hash-table.md`](./topics/01-hash-table.md) | 3 | 1 | 🟨 |
 | 02 | 双指针 Two Pointers | [`topics/02-two-pointers.md`](./topics/02-two-pointers.md) | 4 | 0 | ⬜ |
 | 03 | 滑动窗口 Sliding Window | [`topics/03-sliding-window.md`](./topics/03-sliding-window.md) | 2 | 0 | ⬜ |
 | 04 | 子串 Substring | [`topics/04-substring.md`](./topics/04-substring.md) | 3 | 0 | ⬜ |
@@ -34,7 +34,7 @@
 | 15 | 动态规划 Dynamic Programming | [`topics/15-dynamic-programming.md`](./topics/15-dynamic-programming.md) | 10 | 0 | ⬜ |
 | 16 | 多维动态规划 Multidimensional DP | [`topics/16-multidimensional-dp.md`](./topics/16-multidimensional-dp.md) | 5 | 0 | ⬜ |
 | 17 | 技巧 Tricks | [`topics/17-tricks.md`](./topics/17-tricks.md) | 5 | 0 | ⬜ |
-| — | **合计** |  | **100** | **0** |  |
+| — | **合计** |  | **100** | **1** |  |
 
 ## 二、怎么用
 
@@ -64,3 +64,4 @@ npx tsc --noEmit                                # 严格类型检查
 | 2026-09-27 | 新增 R16「TS 语法首次出现必教」与 `notes/typescript-basics.md` | Tangent / AI |
 | 2026-09-27 | 新增 R17「文档优先，窗口只指路」与 `current-task.md` 导览；套路卡改为「人话版」 | Tangent / AI |
 | 2026-09-27 | 取消 `current-task.md`；新增 R18「零基础节奏：从零详细讲、先讲透再动手」 | Tangent / AI |
+| 2026-09-27 | 专题 01 完成 1 题：1.两数之和 ✅ AC；W1/W2 热身 ✅ | AI |

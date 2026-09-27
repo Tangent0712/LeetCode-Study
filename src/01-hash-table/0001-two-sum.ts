@@ -6,8 +6,12 @@
  *              注意「先查后存」，避免同一个元素用两次。
  */
 export function twoSum(nums: number[], target: number): number[] {
-  // TODO(你): 在这里实现；实现后删掉下面两行占位。
-  void nums;
-  void target;
-  throw new Error("TODO: twoSum 未实现");
+  const num_map = new Map<number,number> () ;
+  for (let i = 0 ; i < nums.length ; i++ ){
+    if(num_map.has(target-nums[i])){
+      return [i , num_map.get(target-nums[i]) ?? 0];
+    }
+    num_map.set(nums[i],i);
+  }
+  return [-1,-1];
 }
