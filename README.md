@@ -3,7 +3,6 @@
 > 目标：**按专题系统推进**刷完 LeetCode 热题 Hot 100，用 **TypeScript** 在 **本地 Windows + Node.js** 运行。
 > 纯文档、中文、术语中英对照、讲透底层；文件里就地作答 → 即时批改 → 更新画像 → git 提交。
 
-- **现在看哪：** [`current-task.md`](./current-task.md)（每次推进后更新的导览）
 - 主协议：[`AGENTS.md`](./AGENTS.md)（每次开工先读）
 - 学习者画像：[`learner-profile.md`](./learner-profile.md)
 - 约定：[`conventions.md`](./conventions.md)
@@ -64,3 +63,4 @@ npx tsc --noEmit                                # 严格类型检查
 | 2026-09-27 | 专题 01：哈希套路卡 + 2 道自出热身题 + 第 1 题脚手架 | AI |
 | 2026-09-27 | 新增 R16「TS 语法首次出现必教」与 `notes/typescript-basics.md` | Tangent / AI |
 | 2026-09-27 | 新增 R17「文档优先，窗口只指路」与 `current-task.md` 导览；套路卡改为「人话版」 | Tangent / AI |
+| 2026-09-27 | 取消 `current-task.md`；新增 R18「零基础节奏：从零详细讲、先讲透再动手」 | Tangent / AI |
