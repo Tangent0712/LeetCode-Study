@@ -122,7 +122,7 @@ count.has(7);     // true  —— 问：记过 7 吗？
 
 - 文件：`src/01-hash-table/warmup-01-has-duplicate.ts`
 - 考点：Set / 哈希去重
-- 状态：⬜
+- 状态：⚠️ 待修正（见下方批改）
 
 **题目**：给定整数数组 `nums`，若**存在至少一个值出现两次及以上**返回 `true`，否则返回 `false`。
 
@@ -131,23 +131,55 @@ count.has(7);     // true  —— 问：记过 7 吗？
 - 进阶（可选，做完再说）：不用额外空间，先排序再比较相邻（时间 O(n log n) / 空间 O(1)）。
 
 **✍️ 我的思路**（先自己写，哪怕一句话）：
->
+>使用Set集合进行判断 先检查数字有没有在集合中 如果没有则登记 如果有则返回true 遍历结束后返回false
 
 **✍️ 我的代码（TypeScript）**：
+
+> （Agent 按 R8 整理，仅调整缩进，未改结论）
+
 ```ts
 export function hasDuplicate(nums: number[]): boolean {
-  // TODO: 你的实现
+  const num = new Set<number>();
+  for (var i in nums) {
+    if (num.has(i)) {
+      return true;
+    } else {
+      num.add(i);
+    }
+  }
+  return false;
 }
 ```
 
-**复杂度自评**：时间 O(?) ｜ 空间 O(?)
+**复杂度自评**：（未填）
 
-**✅ 批改**：
-> （待作答）
+**✅ 批改（2026-09-27）**：
+
+**判定**：⚠️ **思路完全正确，但实现有 1 处硬伤 → 当前不 AC**。
+（`vitest`：5 个测试 **2 failed / 3 passed**；`tsc --noEmit`：**2 个类型错误**。）
+
+**为什么错**：
+- `for (var i in nums)` 用的是 **`for...in`**，它遍历的是**键 / 下标**，而且下标是**字符串** `"0"`、`"1"`…
+  —— 你拿到的**不是数组里的值**。
+- 你的 `num` 是 `Set<number>`（只装数字），却用字符串下标去 `has` / `add`：
+  - `num.has("0")` 永远 `false`（`"0"` ≠ `0`）→ 所以函数**恒返回 false**。
+  - tsc 直接报错（第 12、15 行）：`Argument of type 'string' is not assignable to parameter of type 'number'`。
+- 次要：`var` 是老写法（作用域易错），本项目统一 `const` / `let`。
+- 证据：期望 `true` 的 2 个用例挂了；期望 `false` 的 3 个用例「碰巧」过了（因为恒为 false）。
+
+**改法（最小修改）**：把「取值方式」从 `for...in` 换成 **`for...of`**：
+- `for (var i in nums)` → `for (const x of nums)`
+- 并建议把集合改名为 `seen`、元素叫 `x`，避免混淆。
+- 原理详见 `notes/typescript-basics.md` 的 **011. `for...in` vs `for...of`**。
+
+**复杂度复核**：正确为 **时间 O(n)**（每个元素查一次 Set，平均 O(1)），**空间 O(n)**（最坏存下全部元素）。你的自评是空的，下次记得写。
+
+**同类变式题（改完后做）**：返回**第一个重复出现的数字**（没有则返回 `-1`）。
+- L1 提示：命中 `seen.has(x)` 时 `return x`，否则 `seen.add(x)`。
 
 **复盘**：
-- 卡点：
-- 一句话套路：
+- 卡点：`for...in` 取的是下标（字符串），不是值；`Set<number>` 与字符串比较永不相等。
+- 一句话套路：**`for...of` 取值，`for...in` 取键**；写完先跑 `npx tsc --noEmit`，类型错误会提前抓住这类 bug。
 
 ---
 

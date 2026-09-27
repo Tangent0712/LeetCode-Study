@@ -10,47 +10,36 @@
 ## 你在哪
 
 - 当前专题：**01 哈希（Hash Table）** · 状态 🟨 进行中
-- 当前任务：**热身 W1 —— 判断数组是否有重复元素**
+- 当前任务：**修正 W1** —— 你的思路对了，但 `for...in` 用错导致不 AC；改完再做变式题。
 - 全部进度看：`README.md` 状态真相源 ｜ 总目录：`topics/00-index.md`
 
 ---
 
-## 现在请阅读（按顺序）
+## 现在请阅读
 
-1. **`topics/01-hash-table.md`**
-   - 先读 **套路卡**（已改成「人话版」）：一句话版 → 生活场景 → `Set` / `Map` → 什么时候用 → O() 人话 → 常见坑 → 术语表。
-   - 再读 **「热身 W1」** 那一节，看清题目与要求。
-2. **`notes/typescript-basics.md`**
-   - 做 W1 只需要看：`001 export function`、`002 类型注解`、`003 const/let`、`004 Set`、`005 for...of`、`006 if/return`、`007 占位 throw`。
-   - （`008/009/010` 是测试文件与 Map 的语法，先扫一眼即可。）
+1. **`topics/01-hash-table.md`** → 找到 **「热身 W1」** 里的 **`✅ 批改（2026-09-27）`** 一整段（判定 / 为什么错 / 改法 / 复杂度 / 变式题）。
+2. **`notes/typescript-basics.md`** → **`011. for...in vs for...of`**（这是这次出错的关键语法）。
 
 ---
 
-## 现在要做的动作（W1）
+## 现在要做的动作
 
-1. 打开 `src/01-hash-table/warmup-01-has-duplicate.ts`。
-2. **删掉**这两行占位：
-   ```ts
-   void nums;
-   throw new Error("TODO: hasDuplicate 未实现");
-   ```
-3. 用「准备一张纸 → 逐个查纸 → 有就返回 true」的思路写出实现（只用 `Set` + `for...of` + `if/return`）。
-4. 回到 `topics/01-hash-table.md` 的 **热身 W1** 区，填：
-   - `✍️ 我的思路`（哪怕一句话）
-   - `复杂度自评`（时间 O(?) ｜ 空间 O(?)）
-5. 本地自测（在仓库根目录执行）：
+1. 打开 `src/01-hash-table/warmup-01-has-duplicate.ts`，按批改里的**最小修改**调整（关键：`for...in` → `for...of`，`var` → `const`）。
+2. 跑自测，确认全绿、且类型检查通过：
    ```bash
    npx vitest run src/01-hash-table/warmup-01-has-duplicate.test.ts
    npx tsc --noEmit
    ```
+3. 回到 `topics/01-hash-table.md` 的 **W1** 区，把 **`复杂度自评`** 补上（时间 / 空间）。
+4. 顺手做批改里的 **变式题**：返回第一个重复出现的数字（没有则 `-1`）。
 
 ---
 
 ## 卡住了怎么办
 
-- 不要憋着。**告诉我卡在哪一步**，或哪句语法看不懂。
-- 我会按三级提示给 **L1 方向提示**（绝不给答案）；提示同样会写进 `topics/01-hash-table.md` 的 `### 我的疑问（<日期>）` 区，方便回看。
+- 告诉我卡在哪一步，或在专题 md 里新增 `### 我的疑问（<日期>）`。
+- 我只给 L1 方向提示，并把提示写进文档。
 
-## 做完 W1 之后
+## 做完之后
 
-- Agent 批改（判定 + 原因 + 改法 + 复杂度复核 + 变式题）→ 更新 `README.md` / `learner-profile.md` / `review-log.md` → 把本文件指向 **W2**。
+- Agent 批改 → 更新 `README.md` / `learner-profile.md` / `review-log.md` → 本文件指向 **W2**。

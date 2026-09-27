@@ -7,6 +7,13 @@
  */
 export function hasDuplicate(nums: number[]): boolean {
   // TODO(你): 在这里实现；实现后删掉下面两行占位。
-  void nums;
-  throw new Error("TODO: hasDuplicate 未实现");
+  const num = new Set<number>() ;
+  for (var i in nums){
+    if(num.has(i)){
+      return true;
+    }else{
+      num.add(i);
+    }
+  }
+  return false;
 }
