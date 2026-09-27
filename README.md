@@ -7,6 +7,7 @@
 - 学习者画像：[`learner-profile.md`](./learner-profile.md)
 - 约定：[`conventions.md`](./conventions.md)
 - 总目录：[`topics/00-index.md`](./topics/00-index.md)
+- TS 语法手册（新语法首次出现即登记）：[`notes/typescript-basics.md`](./notes/typescript-basics.md)
 - 错题台账：[`review-log.md`](./review-log.md)
 
 ## 一、状态真相源（进度以此表为准）
@@ -59,3 +60,5 @@ npx tsc --noEmit                                # 严格类型检查
 | 日期 | 内容 | 更新者 |
 |---|---|---|
 | 2026-09-27 | Phase 0：初始化目录、TypeScript 工程、Hot 100 总目录与 17 个专题骨架 | AI |
+| 2026-09-27 | 专题 01：哈希套路卡 + 2 道自出热身题 + 第 1 题脚手架 | AI |
+| 2026-09-27 | 新增 R16「TS 语法首次出现必教」与 `notes/typescript-basics.md` | Tangent / AI |

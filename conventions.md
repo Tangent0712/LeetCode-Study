@@ -57,6 +57,7 @@
 - 链表 / 二叉树节点类型统一放 `src/shared/structures.ts`。
 - 一题一文件：`src/NN-专题/MMMM-题目英文短名.ts`；对应测试 `...test.ts`。
 - 每题配本地测试（`vitest`），提交前先本地跑通。
+- **TS 语法首教（R16）**：任何 TS 语法 / 标准 API 首次出现时必须讲解（是什么 / 为什么 / 最小示例 / 常见坑），并登记到 `notes/typescript-basics.md`。
 
 > 说明：`package.json` / `tsconfig.json` 放在**仓库根目录**（而非 `src/` 内），
 > 这样 `AGENTS.md §9` 里 `npx tsx src/...`、`npx tsc --noEmit` 等命令可在根目录直接运行。
