@@ -6,6 +6,9 @@
  */
 export function countFrequency(nums: number[]): Map<number, number> {
   // TODO(你): 在这里实现；实现后删掉下面两行占位。
-  void nums;
-  throw new Error("TODO: countFrequency 未实现");
+  const count = new Map <number,number> () ;
+  for(const num of nums){
+    count.set(num , (count.get(num) ?? 0) + 1 );
+  }
+  return count;
 }

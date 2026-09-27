@@ -252,6 +252,12 @@ if (seen.has(x)) {      // 如果"白板上有 x"
 - 约束：`0 ≤ nums.length ≤ 10^5`
 - 进阶（可选，做完再说）：不用额外空间，先排序再比较相邻（时间 O(n log n) / 空间 O(1)）。
 
+**🧪 本地验证指令**（在仓库根目录执行）：
+```bash
+npx vitest run src/01-hash-table/warmup-01-has-duplicate.test.ts   # 跑本题测试
+npx tsc --noEmit                                                   # 严格类型检查
+```
+
 **✍️ 我的思路**（先自己写，哪怕一句话）：
 >使用Set集合进行判断 先检查数字有没有在集合中 如果没有则登记 如果有则返回true 遍历结束后返回false
 
@@ -381,8 +387,14 @@ count.set(x, old + 1);
 - 示例：`[1,1,2,3,3,3] -> {1:2, 2:1, 3:3}` ｜ `[] -> {}`（空 Map）
 - 约束：`0 ≤ nums.length ≤ 10^5`
 
+**🧪 本地验证指令**（在仓库根目录执行）：
+```bash
+npx vitest run src/01-hash-table/warmup-02-count-frequency.test.ts   # 跑本题测试
+npx tsc --noEmit                                                     # 严格类型检查
+```
+
 **✍️ 我的思路**（先自己写，哪怕一句话）：
->
+>用Map哈希表来实现
 
 **✍️ 我的代码（TypeScript）**：
 ```ts
@@ -415,6 +427,12 @@ export function countFrequency(nums: number[]): Map<number, number> {
 - 示例：`nums = [3,2,4], target = 6 -> [1,2]`
 - 示例：`nums = [3,3], target = 6 -> [0,1]`
 - 约束：`2 ≤ nums.length ≤ 10^4`
+
+**🧪 本地验证指令**（在仓库根目录执行）：
+```bash
+npx vitest run src/01-hash-table/0001-two-sum.test.ts   # 跑本题测试
+npx tsc --noEmit                                        # 严格类型检查
+```
 
 **✍️ 我的思路**（先自己写，哪怕一句话）：
 >
